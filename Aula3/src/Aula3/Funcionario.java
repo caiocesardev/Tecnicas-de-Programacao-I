@@ -13,6 +13,7 @@ public class Funcionario {
     public Funcionario(String nome, String depto, String rg) {
     	this.nome= nome;
     	this.departamento= depto;
+    	this.rg= rg;
  
     }
     

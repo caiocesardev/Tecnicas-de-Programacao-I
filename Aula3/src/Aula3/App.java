@@ -30,9 +30,9 @@ public class App {
         conta2.numConta = 2;
         contas[1] = conta2;
     }
-
-    private static void consultarSaldo() {
-        int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
+    
+    private static Conta encontrarConta() {
+    	int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
         Conta c = null;
         for (Conta conta : contas) {
             if (conta.numConta == numConta) {
@@ -42,42 +42,29 @@ public class App {
         }
         if (c == null) {
             JOptionPane.showMessageDialog(null, "Conta não encontrada.");
-            return;
+            return null;
         }
+        
+        return c;
+	}
+
+    private static void consultarSaldo() {
+        Conta c = encontrarConta();
+        if (c == null) return;
         JOptionPane.showMessageDialog(null, c.exibirDados());
     }
 
     private static void realizarDeposito() {
-        int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
-        Conta c = null;
-        for (Conta conta : contas) {
-            if (conta.numConta == numConta) {
-                c = conta;
-                break;
-            }
-        }
-        if (c == null) {
-            JOptionPane.showMessageDialog(null, "Conta não encontrada.");
-            return;
-        }
+        Conta c = encontrarConta();
+        if (c == null) return;
         double valorOperacao = Double.parseDouble(JOptionPane.showInputDialog("Digite um valor para depositar:"));
         c.realizarDeposito(valorOperacao);
         JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!");
     }
 
-    private static void realizarSaque() {
-        int numConta = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da conta:"));
-        Conta c = null;
-        for (Conta conta : contas) {
-            if (conta.numConta == numConta) {
-                c = conta;
-                break;
-            }
-        }
-        if (c == null) {
-            JOptionPane.showMessageDialog(null, "Conta não encontrada.");
-            return;
-        }
+	private static void realizarSaque() {
+		Conta c = encontrarConta();
+        if (c == null) return;
         double valorOperacao = Double.parseDouble(JOptionPane.showInputDialog("Digite um valor para sacar:"));
         if (c.realizarSaque(valorOperacao)) {
             JOptionPane.showMessageDialog(null, "Saque realizado com sucesso!");

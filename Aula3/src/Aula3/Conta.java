@@ -9,6 +9,7 @@ public class Conta {
     
     // metodo construtor
     public Conta() {}
+    
     public Conta(int id, double saldo) {
     	this.numConta= id;
     	this.saldo= saldo;
